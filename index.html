@@ -48,14 +48,14 @@ body { font-family: "Cormorant Garamond", Georgia, serif; background: var(--crem
 .titolo-sezione p { font-style: italic; color: var(--bruno-chiaro); font-size: 1.1rem; }
 
 /* OPERA */
-.opera { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 5rem; box-shadow: 0 1px 3px rgba(46,31,14,0.08), 0 8px 40px rgba(46,31,14,0.1); background: #fff; }
+.opera { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 5rem; box-shadow: 0 1px 3px rgba(46,31,14,0.08), 0 8px 40px rgba(46,31,14,0.1); background: #fff; min-height: 420px; }
 .opera:nth-child(even) { direction: rtl; }
 .opera:nth-child(even) > * { direction: ltr; }
 @media (max-width: 680px) { .opera, .opera:nth-child(even) { grid-template-columns: 1fr; direction: ltr; } }
 
-.opera-foto-wrapper { position: relative; overflow: hidden; cursor: zoom-in; }
+.opera-foto-wrapper { position: relative; overflow: hidden; cursor: zoom-in; min-height: 420px; }
 .opera-foto-wrapper::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(176,136,64,0.5); z-index: 2; pointer-events: none; }
-.opera-foto-wrapper img { width: 100%; height: 100%; min-height: 360px; object-fit: cover; display: block; transition: transform 0.7s ease; }
+.opera-foto-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s ease; }
 .opera:hover .opera-foto-wrapper img { transform: scale(1.03); }
 
 .angolo { position: absolute; z-index: 3; width: 18px; height: 18px; border-color: var(--oro); border-style: solid; }
@@ -64,7 +64,7 @@ body { font-family: "Cormorant Garamond", Georgia, serif; background: var(--crem
 .angolo-bl { bottom: 6px; left: 6px; border-width: 0 0 1.5px 1.5px; }
 .angolo-br { bottom: 6px; right: 6px; border-width: 0 1.5px 1.5px 0; }
 
-.opera-scheda { padding: 2.8rem 3rem; display: flex; flex-direction: column; justify-content: center; background: #fff; }
+.opera-scheda { padding: 2.8rem 3rem; display: flex; flex-direction: column; justify-content: center; background: #fff; min-height: 420px; }
 .opera-categoria { font-family: "Cinzel", serif; font-size: 0.6rem; letter-spacing: 0.38em; color: var(--oro); text-transform: uppercase; margin-bottom: 0.9rem; }
 .opera-titolo { font-family: "Cinzel", serif; font-size: clamp(1.1rem, 1.8vw, 1.45rem); font-weight: 500; color: var(--bruno); line-height: 1.3; margin-bottom: 0.4rem; }
 .opera-separatore { width: 32px; height: 1.5px; background: var(--oro); margin: 1rem 0; }
@@ -328,7 +328,7 @@ textarea.form-input { resize: vertical; min-height: 130px; }
     <strong>Telefono &amp; WhatsApp</strong>
     +39 328 986 6989 &nbsp;·&nbsp; +359 893 678 075
     <strong>Instagram</strong>
-    <a href="https://www.instagram.com/st.art_mosaici" target="_blank" rel="noopener">
+    <a href="https://www.instagram.com/start.labstudio" target="_blank" rel="noopener">
       <img class="insta-icon" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI3LjUuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiCgkgdmlld0JveD0iMCAwIDgwMCA4MDAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDgwMCA4MDA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGcgaWQ9Il94MzFfMyI+Cgk8Zz4KCQk8Zz4KCQkJPGxpbmVhckdyYWRpZW50IGlkPSJTVkdJRF8xXyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSI1ODIuNDczNCIgeTE9IjU2NS4zMDkzIiB4Mj0iMjA5LjY4OTciIHkyPSIyMjcuNTkxNyI+CgkJCQk8c3RvcCAgb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojRkVDMDUzIi8+CgkJCQk8c3RvcCAgb2Zmc2V0PSIwLjMyNzMiIHN0eWxlPSJzdG9wLWNvbG9yOiNGMjIwM0UiLz4KCQkJCTxzdG9wICBvZmZzZXQ9IjAuNjQ4NSIgc3R5bGU9InN0b3AtY29sb3I6I0I3MjlBOCIvPgoJCQkJPHN0b3AgIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6IzUzNDJENiIvPgoJCQk8L2xpbmVhckdyYWRpZW50PgoJCQk8cGF0aCBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7ZmlsbDp1cmwoI1NWR0lEXzFfKTsiIGQ9Ik0yMTguNDU5LDEyNy42MDhoMzYzLjA4NQoJCQkJYzQ5LjkzOCwwLDkwLjg0OCw0MC45MDQsOTAuODQ4LDkwLjg0OHYzNjMuMDg4YzAsNDkuOTQyLTQwLjkwOSw5MC44NDgtOTAuODQ4LDkwLjg0OEgyMTguNDU5CgkJCQljLTQ5Ljk0NywwLTkwLjg1MS00MC45MDYtOTAuODUxLTkwLjg0OFYyMTguNDU2QzEyNy42MDgsMTY4LjUxMiwxNjguNTEyLDEyNy42MDgsMjE4LjQ1OSwxMjcuNjA4TDIxOC40NTksMTI3LjYwOHoiLz4KCQk8L2c+CgkJPGc+CgkJCTxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtmaWxsOiNGRkZGRkY7IiBkPSJNNTI2Ljc2OSw0MDAuMDAzYzAtNzAuMDI3LTU2Ljc0My0xMjYuNzctMTI2Ljc2OS0xMjYuNzcKCQkJCWMtNzAuMDI3LDAtMTI2Ljc2Nyw1Ni43NDMtMTI2Ljc2NywxMjYuNzdjMCw3MC4wMjMsNTYuNzQsMTI2Ljc2NywxMjYuNzY3LDEyNi43NjcKCQkJCUM0NzAuMDI2LDUyNi43NjksNTI2Ljc2OSw0NzAuMDI2LDUyNi43NjksNDAwLjAwM0w1MjYuNzY5LDQwMC4wMDN6IE01MjQuMzY5LDI1Ni4wMDVjLTExLjMxNiwwLTIwLjM5OSw5LjE3Mi0yMC4zOTksMjAuMzk5CgkJCQljMCwxMS4zMTYsOS4wODMsMjAuNDAyLDIwLjM5OSwyMC40MDJjMTEuMjI5LDAsMjAuMzk4LTkuMDg2LDIwLjM5OC0yMC40MDJDNTQ0Ljc2OCwyNjUuMTc3LDUzNS41OTksMjU2LjAwNSw1MjQuMzY5LDI1Ni4wMDUKCQkJCUw1MjQuMzY5LDI1Ni4wMDV6IE0yOTYuMzc2LDIyNi42OTNoMjA3LjI1YzM4LjQwMSwwLDY5LjY4NCwzMS4zNyw2OS42ODQsNjkuNjgxdjIwNy4yNDljMCwzOC40MDEtMzEuMjgyLDY5LjY5LTY5LjY4NCw2OS42OQoJCQkJaC0yMDcuMjVjLTM4LjMxNCwwLTY5LjY4Ni0zMS4yODgtNjkuNjg2LTY5LjY5VjI5Ni4zNzRDMjI2LjY5LDI1OC4wNjMsMjU4LjA2MywyMjYuNjkzLDI5Ni4zNzYsMjI2LjY5M0wyOTYuMzc2LDIyNi42OTN6CgkJCQkgTTUwMy42MjYsMjAzLjQ2M2gtMjA3LjI1Yy01MS4wODcsMC05Mi45MTMsNDEuODI2LTkyLjkxMyw5Mi45MXYyMDcuMjQ5YzAsNTEuMTc0LDQxLjgyNiw5Mi45MTYsOTIuOTEzLDkyLjkxNmgyMDcuMjUKCQkJCWM1MS4xNzEsMCw5Mi45MS00MS43NDIsOTIuOTEtOTIuOTE2VjI5Ni4zNzRDNTk2LjUzNiwyNDUuMjg5LDU1NC43OTcsMjAzLjQ2Myw1MDMuNjI2LDIwMy40NjNMNTAzLjYyNiwyMDMuNDYzegoJCQkJIE0yOTkuNTQ1LDQwMC4wMDNjMC01NS40NTksNDQuOTk5LTEwMC40NTgsMTAwLjQ1NS0xMDAuNDU4czEwMC40NTUsNDQuOTk5LDEwMC40NTUsMTAwLjQ1OAoJCQkJYzAsNTUuNDU2LTQ0Ljk5OSwxMDAuNDQ5LTEwMC40NTUsMTAwLjQ0OVMyOTkuNTQ1LDQ1NS40NTksMjk5LjU0NSw0MDAuMDAzTDI5OS41NDUsNDAwLjAwM3oiLz4KCQk8L2c+Cgk8L2c+CjwvZz4KPGcgaWQ9IkxheWVyXzEiPgo8L2c+Cjwvc3ZnPgo=" alt="Instagram">
     </a>
   </div>
