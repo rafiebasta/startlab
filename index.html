@@ -349,9 +349,7 @@ textarea.form-input { resize: vertical; min-height: 130px; }
   emailjs.init({ publicKey: "YOUR_PUBLIC_KEY" });
 
   // LIGHTBOX — semplice e diretto
-  var lbOverlay = document.getElementById("lb-overlay");
-  var lbImg     = document.getElementById("lb-img");
-  var lbClose   = document.getElementById("lb-close");
+  var lbOverlay, lbImg, lbClose;
 
   function apriLb(wrapper) {
     lbImg.src = wrapper.querySelector("img").src;
@@ -365,12 +363,18 @@ textarea.form-input { resize: vertical; min-height: 130px; }
     document.body.style.overflow = "";
   }
 
-  lbClose.addEventListener("click", chiudiLb);
-  lbOverlay.addEventListener("click", function(e) {
-    if (e.target === lbOverlay) chiudiLb();
-  });
-  document.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") chiudiLb();
+  document.addEventListener("DOMContentLoaded", function() {
+    lbOverlay = document.getElementById("lb-overlay");
+    lbImg     = document.getElementById("lb-img");
+    lbClose   = document.getElementById("lb-close");
+
+    lbClose.addEventListener("click", chiudiLb);
+    lbOverlay.addEventListener("click", function(e) {
+      if (e.target === lbOverlay) chiudiLb();
+    });
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") chiudiLb();
+    });
   });
 
   // FORM
