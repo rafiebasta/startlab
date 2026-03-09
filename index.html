@@ -343,11 +343,7 @@ textarea.form-input { resize: vertical; min-height: 130px; }
   </div>
 </div>
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  emailjs.init({ publicKey: "YOUR_PUBLIC_KEY" });
-
   // LIGHTBOX — semplice e diretto
   var lbOverlay, lbImg, lbClose;
 
@@ -377,25 +373,41 @@ textarea.form-input { resize: vertical; min-height: 130px; }
     });
   });
 
-  // FORM
+  // FORM — invio via Formspree (gratuito, no config)
   function inviaForm(e) {
     e.preventDefault();
     var btn      = document.getElementById("f-btn");
     var feedback = document.getElementById("form-feedback");
+    var email    = document.getElementById("f-email").value;
+    var msg      = document.getElementById("f-msg").value;
+
     btn.textContent = "Invio in corso...";
     btn.disabled = true;
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-      from_email: document.getElementById("f-email").value,
-      message:    document.getElementById("f-msg").value
-    }).then(function() {
+
+    fetch("https://formspree.io/f/FORMSPREE_ID", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ email: email, message: msg })
+    })
+    .then(function(r) {
+      if (r.ok) {
+        feedback.style.color = "#b08840";
+        feedback.textContent = "Messaggio inviato con successo!";
+        e.target.reset();
+      } else {
+        throw new Error("ko");
+      }
+    })
+    .catch(function() {
+      // Fallback mailto se Formspree non è configurato
+      var link = "mailto:info.start.lab@gmail.com"
+        + "?subject=" + encodeURIComponent("Richiesta da brochure ST.Art")
+        + "&body=" + encodeURIComponent("Email mittente: " + email + "\n\n" + msg);
+      window.location.href = link;
       feedback.style.color = "#b08840";
-      feedback.textContent = "Messaggio inviato con successo!";
-      e.target.reset();
-      btn.textContent = "Invia richiesta";
-      btn.disabled = false;
-    }, function() {
-      feedback.style.color = "#c0392b";
-      feedback.textContent = "Errore nell\'invio. Scrivi a info.start.lab@gmail.com";
+      feedback.textContent = "Apertura client email...";
+    })
+    .finally(function() {
       btn.textContent = "Invia richiesta";
       btn.disabled = false;
     });
