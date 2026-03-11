@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi Siamo — ST.Art Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: "Laubag";
+  src: url("./fonts/Laubag.woff2") format("woff2"),
+       url("./fonts/Laubag.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --oro: #b08840; --oro-luce: #d4aa5a; --oro-pallido: #f0dea0;
+  --bruno: #2e1f0e; --bruno-medio: #4a3520; --bruno-chiaro: #7a5c3a;
+  --crema: #faf6ef; --crema-scura: #ede4d4; --pergamena: #f5edd8;
+  --testo: #2a1c0a; --testo-morbido: #5c4530;
+}
+html { scroll-behavior: smooth; }
+body { font-family: "Cormorant Garamond", Georgia, serif; background: var(--crema); color: var(--testo); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(46,31,14,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(176,136,64,0.2);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 62px;
+}
+.nav-logo {
+  display: flex; align-items: center; text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo img {
+  height: 42px; width: auto;
+  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35));
+  transition: opacity 0.2s;
+}
+.nav-logo:hover img { opacity: 0.85; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: "Cinzel", serif; font-size: 0.6rem; letter-spacing: 0.35em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.attivo { color: var(--oro-luce); }
+.nav-links a.attivo { border-bottom: 1px solid var(--oro); padding-bottom: 2px; }
+@media (max-width: 600px) {
+  nav { padding: 0 1.2rem; }
+  .nav-links { gap: 1.4rem; }
+  .nav-links a { font-size: 0.55rem; letter-spacing: 0.2em; }
+}
+
+/* ── BANDA ORO ── */
+.banda-oro { height: 3px; background: linear-gradient(90deg, var(--bruno) 0%, var(--oro) 25%, var(--oro-pallido) 50%, var(--oro) 75%, var(--bruno) 100%); }
+
+/* ── HERO ── */
+.hero {
+  margin-top: 62px;
+  background: var(--bruno);
+  padding: 7rem 2rem 5rem;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 60%, rgba(176,136,64,0.13) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 40%, rgba(176,136,64,0.09) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* SVG ornament corners */
+.ornamento { position: absolute; width: 54px; height: 54px; opacity: 0.3; }
+.ornamento svg { width: 100%; height: 100%; }
+.ornamento-tl { top: 20px; left: 24px; }
+.ornamento-tr { top: 20px; right: 24px; transform: scaleX(-1); }
+.ornamento-bl { bottom: 20px; left: 24px; transform: scaleY(-1); }
+.ornamento-br { bottom: 20px; right: 24px; transform: scale(-1); }
+
+.hero-etichetta {
+  display: inline-block; font-family: "Cinzel", serif;
+  font-size: 0.62rem; letter-spacing: 0.5em; color: var(--oro);
+  text-transform: uppercase; margin-bottom: 1.6rem;
+  position: relative; z-index: 1;
+}
+.hero h1 {
+  font-family: "Laubag", "Cinzel", serif; font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: normal; color: #fff; letter-spacing: 0.06em;
+  line-height: 1.3; margin-bottom: 1.4rem;
+  position: relative; z-index: 1;
+}
+.hero h1 em { color: var(--oro-luce); font-style: normal; }
+.linea-oro { width: 60px; height: 1px; background: var(--oro); margin: 0 auto 1.6rem; position: relative; z-index: 1; }
+.hero-sub {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.4rem); color: rgba(255,255,255,0.55);
+  max-width: 600px; margin: 0 auto;
+  position: relative; z-index: 1; line-height: 1.8;
+}
+
+/* ── STORIA ── */
+.storia {
+  max-width: 1000px; margin: 0 auto;
+  padding: 7rem 2.5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+@media (max-width: 720px) { .storia { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.8rem; } }
+
+.storia-testo .etichetta {
+  display: inline-block; font-family: "Cinzel", serif;
+  font-size: 0.6rem; letter-spacing: 0.42em; color: var(--oro);
+  text-transform: uppercase; margin-bottom: 1.2rem;
+}
+.storia-testo h2 {
+  font-family: "Laubag", "Cinzel", serif; font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+  font-weight: normal; color: var(--bruno); line-height: 1.5; margin-bottom: 1.8rem;
+}
+.storia-testo p {
+  font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 2;
+  color: var(--testo-morbido); margin-bottom: 1.4rem;
+}
+.storia-testo p:last-child { margin-bottom: 0; }
+.storia-testo strong { color: var(--bruno); font-weight: 500; }
+
+/* decorative mosaic square */
+.storia-visual {
+  position: relative; aspect-ratio: 1;
+  background: var(--pergamena);
+  border: 1px solid rgba(176,136,64,0.25);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.storia-visual::before {
+  content: "";
+  position: absolute; inset: 16px;
+  border: 1px solid rgba(176,136,64,0.4);
+  z-index: 2; pointer-events: none;
+}
+.angolo { position: absolute; z-index: 3; width: 20px; height: 20px; border-color: var(--oro); border-style: solid; }
+.angolo-tl { top: 8px; left: 8px; border-width: 1.5px 0 0 1.5px; }
+.angolo-tr { top: 8px; right: 8px; border-width: 1.5px 1.5px 0 0; }
+.angolo-bl { bottom: 8px; left: 8px; border-width: 0 0 1.5px 1.5px; }
+.angolo-br { bottom: 8px; right: 8px; border-width: 0 1.5px 1.5px 0; }
+
+/* mosaic grid decorative */
+.mosaico-deco {
+  display: grid; grid-template-columns: repeat(8, 1fr);
+  gap: 3px; padding: 2rem; width: 100%; height: 100%;
+  position: absolute; inset: 0;
+  opacity: 0.55;
+}
+.tessera {
+  border-radius: 1px;
+  animation: scintillio 4s ease-in-out infinite;
+}
+.tessera:nth-child(odd) { animation-delay: 0.5s; }
+.tessera:nth-child(3n) { animation-delay: 1.2s; }
+.storia-visual-testo {
+  position: relative; z-index: 5;
+  text-align: center; padding: 2rem;
+}
+.storia-visual-testo .num {
+  font-family: "Cinzel", serif; font-size: clamp(3rem, 6vw, 5rem);
+  color: var(--oro); line-height: 1; display: block; margin-bottom: 0.3rem;
+  text-shadow: 0 2px 20px rgba(176,136,64,0.4);
+}
+.storia-visual-testo .label {
+  font-family: "Cinzel", serif; font-size: 0.65rem; letter-spacing: 0.4em;
+  color: var(--bruno-chiaro); text-transform: uppercase;
+}
+@keyframes scintillio {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* ── VALORI ── */
+.valori-sezione { background: var(--pergamena); border-top: 1px solid rgba(176,136,64,0.18); border-bottom: 1px solid rgba(176,136,64,0.18); padding: 6rem 2rem; }
+.valori-inner { max-width: 1100px; margin: 0 auto; }
+.titolo-centro {
+  text-align: center; margin-bottom: 4.5rem;
+}
+.titolo-centro .etichetta {
+  display: inline-block; font-family: "Cinzel", serif;
+  font-size: 0.6rem; letter-spacing: 0.45em; color: var(--oro);
+  text-transform: uppercase; margin-bottom: 1.1rem;
+}
+.titolo-centro h2 {
+  font-family: "Cinzel", serif; font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+  font-weight: 500; color: var(--bruno); letter-spacing: 0.04em;
+}
+.valori-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+}
+@media (max-width: 720px) { .valori-grid { grid-template-columns: 1fr; } }
+.valore {
+  background: #fff; padding: 2.8rem 2.4rem;
+  border: 1px solid rgba(176,136,64,0.12);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.valore:hover { box-shadow: 0 8px 40px rgba(46,31,14,0.1); transform: translateY(-3px); }
+.valore-icona {
+  width: 44px; height: 1.5px; background: var(--oro); margin-bottom: 1.8rem;
+}
+.valore h3 {
+  font-family: "Cinzel", serif; font-size: 1rem; font-weight: 500;
+  color: var(--bruno); margin-bottom: 1rem; letter-spacing: 0.04em;
+}
+.valore p {
+  font-size: 1.05rem; line-height: 1.9; color: var(--testo-morbido);
+  font-style: italic;
+}
+
+/* ── MATERIALI ── */
+.materiali-sezione { padding: 6rem 2rem; max-width: 1000px; margin: 0 auto; }
+.materiali-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+  margin-top: 4rem;
+}
+@media (max-width: 600px) { .materiali-grid { grid-template-columns: 1fr; } }
+.materiale {
+  border: 1px solid rgba(176,136,64,0.25);
+  padding: 2.2rem 2rem; background: var(--crema);
+  position: relative; overflow: hidden;
+}
+.materiale::after {
+  content: ""; position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%; background: var(--oro);
+}
+.materiale h4 {
+  font-family: "Cinzel", serif; font-size: 0.88rem; font-weight: 500;
+  color: var(--bruno); margin-bottom: 0.7rem; letter-spacing: 0.05em;
+}
+.materiale p {
+  font-size: 1rem; line-height: 1.85; color: var(--testo-morbido);
+  font-style: italic;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bruno); padding: 3.5rem 2rem 2rem;
+  text-align: center; border-top: 1px solid rgba(176,136,64,0.2);
+  position: relative; overflow: hidden;
+}
+footer::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(176,136,64,0.07) 0%, transparent 70%);
+}
+.footer-inner { position: relative; z-index: 1; }
+.footer-logo { height: 52px; width: auto; opacity: 0.9; }
+.footer-contatti {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0.5rem 1rem; margin-bottom: 1.8rem;
+}
+.footer-link {
+  font-family: "Cormorant Garamond", serif; font-size: 1rem;
+  color: rgba(255,255,255,0.5); text-decoration: none;
+  transition: color 0.2s; font-style: italic;
+}
+.footer-link:hover { color: var(--oro-luce); }
+.footer-sep { color: rgba(176,136,64,0.35); font-size: 0.9rem; }
+.footer-copy {
+  font-family: "Cinzel", serif; font-size: 0.55rem; letter-spacing: 0.35em;
+  color: rgba(255,255,255,0.2); text-transform: uppercase; margin-top: 1rem;
+}
+@media (max-width: 600px) {
+  .footer-sep { display: none; }
+  .footer-contatti { flex-direction: column; gap: 0.5rem; }
+}
+
+/* ── WA WIDGET ── */
+#wa-widget {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 9998;
+  background: #25d366; width: 58px; height: 58px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#wa-widget:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="STArt_Brochure.html" class="nav-logo">
+    <img src="./immagini/logo_w1.svg" alt="ST.Art Lab">
+  </a>
+  <ul class="nav-links">
+    <li><a href="STArt_ChiSiamo.html" class="attivo">Chi siamo</a></li>
+    <li><a href="STArt_Opere.html">Opere</a></li>
+    <li><a href="STArt_Brochure.html">Arte funeraria</a></li>
+    <li><a href="STArt_Brochure.html#contatti">Contatti</a></li>
+  </ul>
+</nav>
+<div class="banda-oro" style="margin-top:62px;"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- ornamenti SVG angoli -->
+  <div class="ornamento ornamento-tl"><svg viewBox="0 0 50 50" fill="none"><path d="M2 48 V2 H48" stroke="#b08840" stroke-width="1.2"/><circle cx="2" cy="2" r="2" fill="#b08840"/></svg></div>
+  <div class="ornamento ornamento-tr"><svg viewBox="0 0 50 50" fill="none"><path d="M2 48 V2 H48" stroke="#b08840" stroke-width="1.2"/><circle cx="2" cy="2" r="2" fill="#b08840"/></svg></div>
+  <div class="ornamento ornamento-bl"><svg viewBox="0 0 50 50" fill="none"><path d="M2 48 V2 H48" stroke="#b08840" stroke-width="1.2"/><circle cx="2" cy="2" r="2" fill="#b08840"/></svg></div>
+  <div class="ornamento ornamento-br"><svg viewBox="0 0 50 50" fill="none"><path d="M2 48 V2 H48" stroke="#b08840" stroke-width="1.2"/><circle cx="2" cy="2" r="2" fill="#b08840"/></svg></div>
+
+  <div class="hero-etichetta">ST.Art Lab · Mosaici artigianali</div>
+  <h1>L'arte del <em>mosaico</em><br>che attraversa il tempo</h1>
+  <div class="linea-oro"></div>
+  <p class="hero-sub">Una famiglia, una tradizione artigianale, un'unica passione:<br>dare vita alla luce attraverso la pietra e il colore.</p>
+</section>
+<div class="banda-oro"></div>
+
+<!-- STORIA -->
+<section class="storia">
+  <div class="storia-testo">
+    <span class="etichetta">La nostra storia</span>
+    <h2>Nati dall'amore<br>per la materia antica</h2>
+    <p>ST.Art Lab nasce da una <strong>passione familiare profonda</strong> per l'arte musiva — quella tradizione millenaria che dai pavimenti di Ravenna alle absidi delle grandi cattedrali ha saputo fermare la luce nella pietra.</p>
+    <p>Lavoriamo con materiali di eccellenza assoluta: lo smalto veneziano soffiato a bocca, la pietra naturale selezionata a mano, e le preziose foglie d'oro 24k delle fornaci Orsoni di Venezia.</p>
+    <p>Ogni tessera è posata a mano. Ogni opera è pensata per durare <strong>secoli</strong>.</p>
+  </div>
+  <div class="storia-visual">
+    <div class="mosaico-deco" id="mosaicoDeco"></div>
+    <div class="angolo angolo-tl"></div>
+    <div class="angolo angolo-tr"></div>
+    <div class="angolo angolo-bl"></div>
+    <div class="angolo angolo-br"></div>
+    <div class="storia-visual-testo">
+      <span class="num">∞</span>
+      <span class="label">Secoli di tradizione</span>
+    </div>
+  </div>
+</section>
+
+<!-- VALORI -->
+<section class="valori-sezione">
+  <div class="valori-inner">
+    <div class="titolo-centro">
+      <div class="etichetta">Cosa ci distingue</div>
+      <h2>Il carattere di ST.Art</h2>
+    </div>
+    <div class="valori-grid">
+      <div class="valore">
+        <div class="valore-icona"></div>
+        <h3>Artigianalità pura</h3>
+        <p>Nessuna stampa, nessuna replica industriale. Ogni opera nasce dalle nostre mani, tessera dopo tessera, con la pazienza e la cura che solo una famiglia artigiana sa esprimere.</p>
+      </div>
+      <div class="valore">
+        <div class="valore-icona"></div>
+        <h3>Materiali d'eccellenza</h3>
+        <p>Utilizziamo esclusivamente smalto veneziano soffiato a bocca, pietre naturali selezionate a mano e foglie d'oro 24k provenienti dalle leggendarie fornaci Orsoni di Venezia.</p>
+      </div>
+      <div class="valore">
+        <div class="valore-icona"></div>
+        <h3>Su commissione</h3>
+        <p>Realizziamo opere su misura per chiese, privati, marmisti e agenzie. Ogni progetto è un dialogo aperto con il committente: ascoltiamo, interpretiamo, creiamo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALI -->
+<section class="materiali-sezione">
+  <div class="titolo-centro" style="margin-bottom:0;">
+    <div class="etichetta">La materia prima</div>
+    <h2 style="font-family:'Cinzel',serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:500;color:var(--bruno);">I materiali che utilizziamo</h2>
+  </div>
+  <div class="materiali-grid">
+    <div class="materiale">
+      <h4>Smalto Veneziano</h4>
+      <p>Prodotto ancora oggi a Murano secondo ricette antiche, lo smalto veneziano offre una profondità cromatica irripetibile e una resistenza al tempo straordinaria. La luce vi si rifrange in modi che nessun altro materiale può eguagliare.</p>
+    </div>
+    <div class="materiale">
+      <h4>Oro 24k — Fornaci Orsoni</h4>
+      <p>Le tessere d'oro che utilizziamo nascono dalla più antica manifattura veneziana ancora attiva, fondata nel 1888. Una foglia d'oro purissimo è racchiusa tra due strati di vetro soffiato: eterno, luminoso, incorruttibile.</p>
+    </div>
+    <div class="materiale">
+      <h4>Pietra Naturale Grezza</h4>
+      <p>Selezioniamo pietre di diversa origine e durezza, che lavorano insieme allo smalto creando un contrasto materico prezioso: il rigore del minerale che dialoga con la trasparenza del vetro.</p>
+    </div>
+    <div class="materiale">
+      <h4>Pietra Naturale Lavorata</h4>
+      <p>Tagliata e lucidata nel nostro laboratorio, la pietra lavorata acquisisce superfici che catturano la luce in modo diverso, arricchendo la composizione musiva di sfumature tattili e visive uniche.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <img src="./immagini/logo_w1.svg" alt="ST.Art Lab" class="footer-logo">
+    <div class="linea-oro" style="margin: 1.6rem auto;"></div>
+    <div class="footer-contatti">
+      <a href="tel:+393289866989" class="footer-link">+39 328 986 6989</a>
+      <span class="footer-sep">·</span>
+      <a href="tel:+359893678075" class="footer-link">+359 893 678 075</a>
+      <span class="footer-sep">·</span>
+      <a href="mailto:info.start.lab@gmail.com" class="footer-link">info.start.lab@gmail.com</a>
+      <span class="footer-sep">·</span>
+      <a href="https://www.instagram.com/start.labstudio/" target="_blank" rel="noopener" class="footer-link">@start.labstudio</a>
+    </div>
+    <div class="footer-copy">© 2026 ST.Art Lab — Tutti i diritti riservati</div>
+  </div>
+</footer>
+
+<!-- WA WIDGET -->
+<a href="https://wa.me/393289866989" target="_blank" rel="noopener" id="wa-widget" title="Scrivici su WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="#fff">
+    <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.773L0 32l8.437-2.01A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.771-1.854l-.486-.29-5.01 1.194 1.234-4.874-.317-.5A13.24 13.24 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.987c-.398-.199-2.354-1.162-2.719-1.294-.365-.133-.63-.199-.895.199-.265.398-1.028 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.199-1.681-.62-3.202-1.977-1.183-1.056-1.982-2.36-2.213-2.758-.232-.398-.025-.613.174-.811.179-.178.398-.464.597-.696.199-.232.265-.398.398-.664.133-.265.066-.497-.033-.696-.1-.199-.895-2.156-1.227-2.952-.323-.775-.65-.67-.895-.682l-.762-.013c-.265 0-.696.1-1.061.497-.365.398-1.393 1.361-1.393 3.317s1.427 3.847 1.626 4.112c.199.265 2.808 4.286 6.803 6.012.951.41 1.693.655 2.271.839.954.304 1.823.261 2.51.158.766-.114 2.354-.962 2.686-1.891.332-.929.332-1.725.232-1.891-.099-.166-.365-.265-.762-.464z"/>
+  </svg>
+</a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Generazione griglia mosaico decorativa
+(function() {
+  const colori = [
+    '#b08840','#d4aa5a','#f0dea0','#7a5c3a','#4a3520',
+    '#c8a96a','#e8c87a','#9a6a3a','#f5edd8','#2e1f0e',
+    '#d4aa5a','#b08840','#6a4a28','#e0c890','#faf6ef'
+  ];
+  const container = document.getElementById('mosaicoDeco');
+  if (!container) return;
+  const n = 8 * 10; // 8 colonne * ~10 righe
+  for (let i = 0; i < n; i++) {
+    const t = document.createElement('div');
+    t.className = 'tessera';
+    t.st
