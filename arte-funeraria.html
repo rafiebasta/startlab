@@ -67,12 +67,12 @@ nav {
 .sfondo-pergamena { background: var(--pergamena); border-top: 1px solid rgba(176,136,64,0.2); border-bottom: 1px solid rgba(176,136,64,0.2); }
 .catalogo { padding: 3rem 2rem 5rem; max-width: 1100px; margin: 0 auto; }
 
-.opera { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 5rem; box-shadow: 0 1px 3px rgba(46,31,14,0.08), 0 8px 40px rgba(46,31,14,0.1); background: #fff; height: 420px; }
+.opera { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 5rem; box-shadow: 0 1px 3px rgba(46,31,14,0.08), 0 8px 40px rgba(46,31,14,0.1); background: #fff; min-height: 480px; }
 .opera:nth-child(even) { direction: rtl; }
 .opera:nth-child(even) > * { direction: ltr; }
 @media (max-width: 680px) { .opera, .opera:nth-child(even) { grid-template-columns: 1fr; direction: ltr; height: auto; } .opera-foto-wrapper { height: 300px; } }
 
-.opera-foto-wrapper { position: relative; overflow: hidden; cursor: zoom-in; height: 100%; }
+.opera-foto-wrapper { position: relative; overflow: hidden; cursor: zoom-in; min-height: 480px; }
 .opera-foto-wrapper::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(176,136,64,0.5); z-index: 2; pointer-events: none; }
 .opera-foto-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.7s ease; }
 .opera:hover .opera-foto-wrapper img { transform: scale(1.03); }
@@ -83,7 +83,7 @@ nav {
 .angolo-bl { bottom: 6px; left: 6px; border-width: 0 0 1.5px 1.5px; }
 .angolo-br { bottom: 6px; right: 6px; border-width: 0 1.5px 1.5px 0; }
 
-.opera-scheda { padding: 2.8rem 3rem; display: flex; flex-direction: column; justify-content: center; background: #fff; height: 100%; overflow-y: auto; }
+.opera-scheda { padding: 2.8rem 3rem; display: flex; flex-direction: column; justify-content: center; background: #fff; }
 .opera-categoria { font-family: "Cinzel", serif; font-size: 0.6rem; letter-spacing: 0.38em; color: var(--oro); text-transform: uppercase; margin-bottom: 0.9rem; }
 .opera-titolo { font-family: "Cinzel", serif; font-size: clamp(1.1rem, 1.8vw, 1.45rem); font-weight: 500; color: var(--bruno); line-height: 1.3; margin-bottom: 0.4rem; }
 .opera-separatore { width: 32px; height: 1.5px; background: var(--oro); margin: 1rem 0; }
