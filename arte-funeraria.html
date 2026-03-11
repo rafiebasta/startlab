@@ -177,7 +177,7 @@ footer::before {
 <section class="catalogo">
 
   <article class="opera">
-    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+    <div class="opera-foto-wrapper">
       <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
       <img src="immagini/gesusandamiano.jpg" alt="Cristo di San Damiano">
     </div>
@@ -194,7 +194,7 @@ footer::before {
   </article>
 
   <article class="opera">
-    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+    <div class="opera-foto-wrapper">
       <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
       <img src="immagini/angelo.jpg" alt="Angelo Custode">
     </div>
@@ -211,7 +211,7 @@ footer::before {
   </article>
 
   <article class="opera">
-    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+    <div class="opera-foto-wrapper">
       <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
       <img src="immagini/croce.jpg" alt="Croce">
     </div>
@@ -228,7 +228,7 @@ footer::before {
   </article>
 
   <article class="opera">
-    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+    <div class="opera-foto-wrapper">
       <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
       <img src="immagini/colomba.jpg" alt="Colomba">
     </div>
@@ -245,7 +245,7 @@ footer::before {
   </article>
 
   <article class="opera">
-    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+    <div class="opera-foto-wrapper">
       <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
       <img src="immagini/madonna_medjugorie.jpg" alt="Madonna di Medjugorje">
     </div>
@@ -264,7 +264,7 @@ footer::before {
 
 
   <article class="opera">
-    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+    <div class="opera-foto-wrapper">
       <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
       <img src="immagini/giglio.jpg" alt="Gigli">
     </div>
@@ -281,7 +281,7 @@ footer::before {
   </article>
 
   <article class="opera">
-    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+    <div class="opera-foto-wrapper">
       <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
       <img src="immagini/fiorediloto.jpg" alt="Fiore di Loto">
     </div>
@@ -298,7 +298,7 @@ footer::before {
   </article>
 
   <article class="opera">
-    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+    <div class="opera-foto-wrapper">
       <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
       <img src="immagini/callafondoviola.jpg" alt="Calla">
     </div>
@@ -350,28 +350,34 @@ footer::before {
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function apriLb(wrapper) {
-  var img = wrapper.querySelector("img");
-  if (img) {
-    document.getElementById("lb-img").src = img.src;
-    document.getElementById("lb-overlay").classList.add("open");
-    document.body.style.overflow = "hidden";
-  }
-}
+<script>
 document.addEventListener("DOMContentLoaded", function() {
   var overlay = document.getElementById("lb-overlay");
+  var lbImg   = document.getElementById("lb-img");
   var lbClose = document.getElementById("lb-close");
-  lbClose.addEventListener("click", function() {
+
+  function apri(src) {
+    lbImg.src = src;
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function chiudi() {
     overlay.classList.remove("open");
-    document.getElementById("lb-img").src = "";
+    lbImg.src = "";
     document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".opera-foto-wrapper").forEach(function(wrapper) {
+    wrapper.addEventListener("click", function() {
+      var img = wrapper.querySelector("img");
+      if (img) apri(img.src);
+    });
   });
-  overlay.addEventListener("click", function(e) {
-    if (e.target === overlay) {
-      overlay.classList.remove("open");
-      document.getElementById("lb-img").src = "";
-      document.body.style.overflow = "";
-    }
-  });
-  d
+
+  lbClose.addEventListener("click", chiudi);
+  overlay.addEventListener("click", function(e) { if (e.target === overlay) chiudi(); });
+  document.addEventListener("keydown", function(e) { if (e.key === "Escape") chiudi(); });
+});
+</script>
+</body>
+</html>
