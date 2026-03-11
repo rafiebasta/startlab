@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arte Funeraria — ST.Art Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: "Laubag";
+  src: url("./fonts/Laubag.woff2") format("woff2"),
+       url("./fonts/Laubag.woff") format("woff");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --oro: #b08840; --oro-luce: #d4aa5a; --oro-pallido: #f0dea0;
+  --bruno: #2e1f0e; --bruno-medio: #4a3520; --bruno-chiaro: #7a5c3a;
+  --crema: #faf6ef; --crema-scura: #ede4d4; --pergamena: #f5edd8;
+  --testo: #2a1c0a; --testo-morbido: #5c4530;
+}
+html { scroll-behavior: smooth; }
+body { font-family: "Cormorant Garamond", Georgia, serif; background: var(--crema); color: var(--testo); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(46,31,14,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(176,136,64,0.2);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 62px;
+}
+.nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+.nav-logo img { height: 42px; width: auto; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35)); transition: opacity 0.2s; }
+.nav-logo:hover img { opacity: 0.85; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: "Cinzel", serif; font-size: 0.6rem; letter-spacing: 0.35em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.attivo { color: var(--oro-luce); }
+.nav-links a.attivo { border-bottom: 1px solid var(--oro); padding-bottom: 2px; }
+@media (max-width: 600px) {
+  nav { padding: 0 1.2rem; }
+  .nav-links { gap: 1.4rem; }
+  .nav-links a { font-size: 0.55rem; letter-spacing: 0.2em; }
+}
+
+/* ── BANDA ORO ── */
+.banda-oro { height: 3px; background: linear-gradient(90deg, var(--bruno) 0%, var(--oro) 25%, var(--oro-pallido) 50%, var(--oro) 75%, var(--bruno) 100%); }
+
+/* ── SEPARATORE SEZIONE ── */
+.sep-sezione {
+  display: flex; align-items: center; gap: 1.4rem;
+  padding: 4rem 3rem 2rem;
+  max-width: 1400px; margin: 0 auto;
+}
+.sep-sezione .linea { flex: 1; height: 1px; background: rgba(176,136,64,0.25); }
+.sep-sezione .etichetta {
+  font-family: "Cinzel", serif; font-size: 0.62rem; letter-spacing: 0.5em;
+  text-transform: uppercase; color: var(--oro); white-space: nowrap;
+}
+
+/* ── CATALOGO OPERE ── */
+.sfondo-pergamena { background: var(--pergamena); border-top: 1px solid rgba(176,136,64,0.2); border-bottom: 1px solid rgba(176,136,64,0.2); }
+.catalogo { padding: 3rem 2rem 5rem; max-width: 1100px; margin: 0 auto; }
+
+.opera { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 5rem; box-shadow: 0 1px 3px rgba(46,31,14,0.08), 0 8px 40px rgba(46,31,14,0.1); background: #fff; height: 420px; }
+.opera:nth-child(even) { direction: rtl; }
+.opera:nth-child(even) > * { direction: ltr; }
+@media (max-width: 680px) { .opera, .opera:nth-child(even) { grid-template-columns: 1fr; direction: ltr; height: auto; } .opera-foto-wrapper { height: 300px; } }
+
+.opera-foto-wrapper { position: relative; overflow: hidden; cursor: zoom-in; height: 100%; }
+.opera-foto-wrapper::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(176,136,64,0.5); z-index: 2; pointer-events: none; }
+.opera-foto-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.7s ease; }
+.opera:hover .opera-foto-wrapper img { transform: scale(1.03); }
+
+.angolo { position: absolute; z-index: 3; width: 18px; height: 18px; border-color: var(--oro); border-style: solid; }
+.angolo-tl { top: 6px; left: 6px; border-width: 1.5px 0 0 1.5px; }
+.angolo-tr { top: 6px; right: 6px; border-width: 1.5px 1.5px 0 0; }
+.angolo-bl { bottom: 6px; left: 6px; border-width: 0 0 1.5px 1.5px; }
+.angolo-br { bottom: 6px; right: 6px; border-width: 0 1.5px 1.5px 0; }
+
+.opera-scheda { padding: 2.8rem 3rem; display: flex; flex-direction: column; justify-content: center; background: #fff; height: 100%; overflow-y: auto; }
+.opera-categoria { font-family: "Cinzel", serif; font-size: 0.6rem; letter-spacing: 0.38em; color: var(--oro); text-transform: uppercase; margin-bottom: 0.9rem; }
+.opera-titolo { font-family: "Cinzel", serif; font-size: clamp(1.1rem, 1.8vw, 1.45rem); font-weight: 500; color: var(--bruno); line-height: 1.3; margin-bottom: 0.4rem; }
+.opera-separatore { width: 32px; height: 1.5px; background: var(--oro); margin: 1rem 0; }
+.opera-desc { font-size: 1.05rem; line-height: 1.85; color: var(--testo-morbido); font-style: italic; margin-bottom: 1.5rem; }
+.varianti { border: 1px solid var(--crema-scura); }
+.variante { padding: 0.65rem 1rem; border-bottom: 1px solid var(--crema-scura); }
+.variante:last-child { border-bottom: none; }
+.variante-misura { font-family: "Cinzel", serif; font-size: 0.8rem; color: var(--bruno-medio); letter-spacing: 0.05em; }
+.opera-materiali { font-size: 0.88rem; color: var(--testo-morbido); font-style: italic; margin-bottom: 0.5rem; line-height: 1.6; }
+.opera-prezzo { font-family: "Cinzel", serif; font-size: 1.15rem; font-weight: 500; color: var(--oro); letter-spacing: 0.04em; margin-top: 0.8rem; }
+.opera-prezzo-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--bruno-chiaro); display: block; margin-bottom: 0.2rem; }
+.nota-prezzi { font-size: 0.82rem; font-style: italic; color: var(--bruno-chiaro); margin-top: 1rem; }
+
+/* ── DIVISORE ── */
+.divisore { border: none; border-top: 1px solid rgba(176,136,64,0.18); margin: 1rem 3rem 0; max-width: 1400px; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bruno); padding: 3.5rem 2rem 2rem;
+  text-align: center; border-top: 1px solid rgba(176,136,64,0.2);
+  position: relative; overflow: hidden;
+}
+footer::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(176,136,64,0.07) 0%, transparent 70%);
+}
+.footer-inner { position: relative; z-index: 1; }
+.footer-logo { height: 52px; width: auto; opacity: 0.9; }
+.linea-oro { width: 60px; height: 1px; background: var(--oro); margin: 1.6rem auto; }
+.footer-contatti { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1rem; margin-bottom: 1.8rem; }
+.footer-link { font-family: "Cormorant Garamond", serif; font-size: 1rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; font-style: italic; }
+.footer-link:hover { color: var(--oro-luce); }
+.footer-sep { color: rgba(176,136,64,0.35); font-size: 0.9rem; }
+.footer-copy { font-family: "Cinzel", serif; font-size: 0.55rem; letter-spacing: 0.35em; color: rgba(255,255,255,0.2); text-transform: uppercase; margin-top: 1rem; }
+@media (max-width: 600px) {
+  .footer-sep { display: none; }
+  .footer-contatti { flex-direction: column; gap: 0.5rem; }
+}
+
+/* ── WA ── */
+#wa-widget {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 9998;
+  background: #25d366; width: 58px; height: 58px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#wa-widget:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+
+/* ── LIGHTBOX ── */
+#lb-overlay {
+  display: none; position: fixed; inset: 0; z-index: 99999;
+  background: rgba(8,4,1,0.96);
+  justify-content: center; align-items: center; padding: 1rem;
+}
+#lb-overlay.open { display: flex; }
+#lb-box { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; max-width: 92vw; max-height: 92vh; }
+#lb-overlay img { max-width: 88vw; max-height: 82vh; object-fit: contain; display: block; box-shadow: 0 0 60px rgba(176,136,64,0.2); }
+#lb-close {
+  font-family: "Cinzel", serif; font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--oro-luce); background: transparent; border: 1px solid rgba(176,136,64,0.5);
+  padding: 0.35rem 1rem; cursor: pointer; align-self: flex-end;
+}
+#lb-close:hover { background: rgba(176,136,64,0.1); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="STArt_Brochure.html" class="nav-logo">
+    <img src="./immagini/logo_w1.png" alt="ST.Art Lab">
+  </a>
+  <ul class="nav-links">
+    <li><a href="STArt_ChiSiamo.html">Chi siamo</a></li>
+    <li><a href="STArt_Opere.html">Opere</a></li>
+    <li><a href="STArt_ArteFuneraria.html" class="attivo">Arte funeraria</a></li>
+    <li><a href="STArt_Brochure.html#contatti">Contatti</a></li>
+  </ul>
+</nav>
+<div class="banda-oro" style="margin-top:62px;"></div>
+
+<!-- SEZIONE: ARTE SACRA & CHIESE -->
+<div class="sep-sezione">
+  <div class="linea"></div>
+  <span class="etichetta">Arte sacra &amp; Chiese</span>
+  <div class="linea"></div>
+</div>
+
+<div class="sfondo-pergamena">
+<section class="catalogo">
+
+  <article class="opera">
+    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+      <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
+      <img src="immagini/gesusandamiano.jpg" alt="Cristo di San Damiano">
+    </div>
+    <div class="opera-scheda">
+      <div class="opera-categoria">Arte Sacra</div>
+      <h3 class="opera-titolo">Cristo di San Damiano</h3>
+      <div class="opera-separatore"></div>
+      <p class="opera-desc">Volto del Cristo ispirato all'icona originale di San Damiano, in smalti veneziani e foglia d'oro 24k Orsoni su base in pietra. La profondità dello sguardo e la ricchezza cromatica ne fanno un'opera di grande intensità spirituale.</p>
+      <p class="opera-materiali">Smalto veneziano · Oro 24k Orsoni</p>
+      <div class="varianti"><div class="variante"><div class="variante-misura">18,5 × 18,5 cm</div></div></div>
+      <div class="opera-prezzo"><span class="opera-prezzo-label">Prezzo</span>€ 650,00</div>
+      <p class="nota-prezzi">* Misure diverse disponibili su richiesta.</p>
+    </div>
+  </article>
+
+  <article class="opera">
+    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+      <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
+      <img src="immagini/angelo.jpg" alt="Angelo Custode">
+    </div>
+    <div class="opera-scheda">
+      <div class="opera-categoria">Arte Sacra</div>
+      <h3 class="opera-titolo">Angelo Custode</h3>
+      <div class="opera-separatore"></div>
+      <p class="opera-desc">Angelo bambino a mani giunte, raccolto in preghiera. Smalto veneziano, pietra naturale grezza e lavorata. Soggetto tra i più richiesti per ambienti sacri, commemorativi e abitazioni private.</p>
+      <p class="opera-materiali">Smalto veneziano · Pietra naturale grezza e lavorata</p>
+      <div class="varianti"><div class="variante"><div class="variante-misura">25 × 25 cm</div></div></div>
+      <div class="opera-prezzo"><span class="opera-prezzo-label">Prezzo</span>€ 900,00</div>
+      <p class="nota-prezzi">* Misure diverse disponibili su richiesta.</p>
+    </div>
+  </article>
+
+  <article class="opera">
+    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+      <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
+      <img src="immagini/croce.jpg" alt="Croce">
+    </div>
+    <div class="opera-scheda">
+      <div class="opera-categoria">Arte Sacra</div>
+      <h3 class="opera-titolo">Croce</h3>
+      <div class="opera-separatore"></div>
+      <p class="opera-desc">Croce con raggi luminosi in foglia d'oro 24k Orsoni su fondo in pietra naturale lavorata. I bordi in smalto veneziano scandiscono la forma con precisione e vigore. Opera verticale di grande presenza.</p>
+      <p class="opera-materiali">Smalto veneziano · Pietra naturale lavorata · Oro 24k Orsoni</p>
+      <div class="varianti"><div class="variante"><div class="variante-misura">11 × 20 cm</div></div></div>
+      <div class="opera-prezzo"><span class="opera-prezzo-label">Prezzo</span>€ 200,00</div>
+      <p class="nota-prezzi">* Misure diverse disponibili su richiesta.</p>
+    </div>
+  </article>
+
+  <article class="opera">
+    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+      <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
+      <img src="immagini/colomba.jpg" alt="Colomba">
+    </div>
+    <div class="opera-scheda">
+      <div class="opera-categoria">Arte Sacra · Decorativo</div>
+      <h3 class="opera-titolo">Colomba</h3>
+      <div class="opera-separatore"></div>
+      <p class="opera-desc">Colomba in volo al centro di un medaglione circolare, in smalti veneziani turchese e azzurro con inserti in foglia d'oro 24k Orsoni. Forma tonda di grande eleganza, sospesa tra il sacro e il contemporaneo.</p>
+      <p class="opera-materiali">Smalto veneziano · Oro 24k Orsoni</p>
+      <div class="varianti"><div class="variante"><div class="variante-misura">Ø 21 cm</div></div></div>
+      <div class="opera-prezzo"><span class="opera-prezzo-label">Prezzo</span>€ 500,00</div>
+      <p class="nota-prezzi">* Misure diverse disponibili su richiesta.</p>
+    </div>
+  </article>
+
+  <article class="opera">
+    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+      <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
+      <img src="immagini/madonna_medjugorie.jpg" alt="Madonna di Medjugorje">
+    </div>
+    <div class="opera-scheda">
+      <div class="opera-categoria">Arte Sacra</div>
+      <h3 class="opera-titolo">Medjugorje</h3>
+      <div class="opera-separatore"></div>
+      <p class="opera-desc">Volto della Madonna ispirato all'iconografia di Medjugorje, in smalti veneziani e foglia d'oro 24k Orsoni. Il viso raccolto e sereno, il velo e il nimbo dorato evocano un profondo senso di pace e contemplazione.</p>
+      <p class="opera-materiali">Smalto veneziano · Oro 24k Orsoni</p>
+      <div class="varianti"><div class="variante"><div class="variante-misura">20,5 × 28 cm</div></div></div>
+      <div class="opera-prezzo"><span class="opera-prezzo-label">Prezzo</span>€ 750,00</div>
+      <p class="nota-prezzi">* Misure diverse disponibili su richiesta.</p>
+    </div>
+  </article>
+
+</section>
+</div>
+
+<hr class="divisore">
+
+<!-- SEZIONE: FLOREALE -->
+<div class="sep-sezione">
+  <div class="linea"></div>
+  <span class="etichetta">Floreale</span>
+  <div class="linea"></div>
+</div>
+
+<div class="sfondo-pergamena">
+<section class="catalogo">
+
+  <article class="opera">
+    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+      <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
+      <img src="immagini/giglio.jpg" alt="Gigli">
+    </div>
+    <div class="opera-scheda">
+      <div class="opera-categoria">Floreale</div>
+      <h3 class="opera-titolo">Gigli</h3>
+      <div class="opera-separatore"></div>
+      <p class="opera-desc">Due gigli bianchi in piena fioritura su fondo di pietra naturale grezza. Smalto veneziano bianco e verde, stami in rosso e oro. Simbolo di purezza e rinascita, ideale per cerimonie e dimore di pregio.</p>
+      <p class="opera-materiali">Smalto veneziano · Pietra naturale grezza</p>
+      <div class="varianti"><div class="variante"><div class="variante-misura">14 × 26 cm</div></div></div>
+      <div class="opera-prezzo"><span class="opera-prezzo-label">Prezzo</span>€ 450,00</div>
+      <p class="nota-prezzi">* Misure diverse disponibili su richiesta.</p>
+    </div>
+  </article>
+
+  <article class="opera">
+    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+      <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
+      <img src="immagini/fiorediloto.jpg" alt="Fiore di Loto">
+    </div>
+    <div class="opera-scheda">
+      <div class="opera-categoria">Floreale</div>
+      <h3 class="opera-titolo">Fiore di Loto</h3>
+      <div class="opera-separatore"></div>
+      <p class="opera-desc">Tre fiori di loto su fondo di pietra naturale grezza. Smalti veneziani in toni rosa e lilla con steli in verde smeraldo. Una composizione di luminosa freschezza, adatta a qualsiasi ambiente.</p>
+      <p class="opera-materiali">Smalto veneziano · Pietra naturale grezza</p>
+      <div class="varianti"><div class="variante"><div class="variante-misura">15 × 25 cm</div></div></div>
+      <div class="opera-prezzo"><span class="opera-prezzo-label">Prezzo</span>€ 450,00</div>
+      <p class="nota-prezzi">* Misure diverse disponibili su richiesta.</p>
+    </div>
+  </article>
+
+  <article class="opera">
+    <div class="opera-foto-wrapper" onclick="apriLb(this)">
+      <div class="angolo angolo-tl"></div><div class="angolo angolo-tr"></div><div class="angolo angolo-bl"></div><div class="angolo angolo-br"></div>
+      <img src="immagini/callafondoviola.jpg" alt="Calla">
+    </div>
+    <div class="opera-scheda">
+      <div class="opera-categoria">Floreale</div>
+      <h3 class="opera-titolo">Calla</h3>
+      <div class="opera-separatore"></div>
+      <p class="opera-desc">Una calla bianca su fondo di smalti veneziani lilla, viola e blu cobalto, attraversato da sottili filamenti in oro 24k Orsoni. Contrasto cromatico di rara bellezza pittorica.</p>
+      <p class="opera-materiali">Smalto veneziano · Oro 24k Orsoni</p>
+      <div class="varianti"><div class="variante"><div class="variante-misura">16 × 26,5 cm</div></div></div>
+      <div class="opera-prezzo"><span class="opera-prezzo-label">Prezzo</span>€ 600,00</div>
+      <p class="nota-prezzi">* Misure diverse disponibili su richiesta.</p>
+    </div>
+  </article>
+
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <img src="./immagini/logo_w1.png" alt="ST.Art Lab" class="footer-logo">
+    <div class="linea-oro"></div>
+    <div class="footer-contatti">
+      <a href="tel:+393289866989" class="footer-link">+39 328 986 6989</a>
+      <span class="footer-sep">·</span>
+      <a href="tel:+359893678075" class="footer-link">+359 893 678 075</a>
+      <span class="footer-sep">·</span>
+      <a href="mailto:info.start.lab@gmail.com" class="footer-link">info.start.lab@gmail.com</a>
+      <span class="footer-sep">·</span>
+      <a href="https://www.instagram.com/start.labstudio/" target="_blank" rel="noopener" class="footer-link">@start.labstudio</a>
+    </div>
+    <div class="footer-copy">© 2026 ST.Art Lab — Tutti i diritti riservati</div>
+  </div>
+</footer>
+
+<!-- WA WIDGET -->
+<a href="https://wa.me/393289866989" target="_blank" rel="noopener" id="wa-widget" title="Scrivici su WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="#fff">
+    <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.773L0 32l8.437-2.01A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.771-1.854l-.486-.29-5.01 1.194 1.234-4.874-.317-.5A13.24 13.24 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.987c-.398-.199-2.354-1.162-2.719-1.294-.365-.133-.63-.199-.895.199-.265.398-1.028 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.199-1.681-.62-3.202-1.977-1.183-1.056-1.982-2.36-2.213-2.758-.232-.398-.025-.613.174-.811.179-.178.398-.464.597-.696.199-.232.265-.398.398-.664.133-.265.066-.497-.033-.696-.1-.199-.895-2.156-1.227-2.952-.323-.775-.65-.67-.895-.682l-.762-.013c-.265 0-.696.1-1.061.497-.365.398-1.393 1.361-1.393 3.317s1.427 3.847 1.626 4.112c.199.265 2.808 4.286 6.803 6.012.951.41 1.693.655 2.271.839.954.304 1.823.261 2.51.158.766-.114 2.354-.962 2.686-1.891.332-.929.332-1.725.232-1.891-.099-.166-.365-.265-.762-.464z"/>
+  </svg>
+</a>
+
+<!-- LIGHTBOX -->
+<div id="lb-overlay">
+  <div id="lb-box">
+    <button id="lb-close">✕ Chiudi</button>
+    <img id="lb-img" src="" alt="Opera in dettaglio">
+  </div>
+</div>
+
+<script>
+function apriLb(wrapper) {
+  var img = wrapper.querySelector("img");
+  if (img) {
+    document.getElementById("lb-img").src = img.src;
+    document.getElementById("lb-overlay").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+}
+document.addEventListener("DOMContentLoaded", function() {
+  var overlay = document.getElementById("lb-overlay");
+  var lbClose = document.getElementById("lb-close");
+  lbClose.addEventListener("click", function() {
+    overlay.classList.remove("open");
+    document.getElementById("lb-img").src = "";
+    document.body.style.overflow = "";
+  });
+  overlay.addEventListener("click", function(e) {
+    if (e.target === overlay) {
+      overlay.classList.remove("open");
+      document.getElementById("lb-img").src = "";
+      document.body.style.overflow = "";
+    }
+  });
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") {
+      overlay.classList.remove("open");
+      document.getElementById("lb-img").src = "";
+      document.body.style.overflow = "";
+    }
+  });
+});
+</script>
+</body>
+</html>
