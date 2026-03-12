@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contatti — ST.Art Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: "Laubag";
+  src: url("./fonts/Laubag.woff2") format("woff2"),
+       url("./fonts/Laubag.woff") format("woff");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --oro: #b08840; --oro-luce: #d4aa5a; --oro-pallido: #f0dea0;
+  --bruno: #2e1f0e; --bruno-medio: #4a3520; --bruno-chiaro: #7a5c3a;
+  --crema: #faf6ef; --crema-scura: #ede4d4; --pergamena: #f5edd8;
+  --testo: #2a1c0a; --testo-morbido: #5c4530;
+}
+html { scroll-behavior: smooth; }
+body { font-family: "Cormorant Garamond", Georgia, serif; background: var(--crema); color: var(--testo); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(46,31,14,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(176,136,64,0.2);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 62px;
+}
+.nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+.nav-logo img { height: 42px; width: auto; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35)); transition: opacity 0.2s; }
+.nav-logo:hover img { opacity: 0.85; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: "Cinzel", serif; font-size: 0.6rem; letter-spacing: 0.35em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.attivo { color: var(--oro-luce); }
+.nav-links a.attivo { border-bottom: 1px solid var(--oro); padding-bottom: 2px; }
+@media (max-width: 600px) {
+  nav { padding: 0 1.2rem; }
+  .nav-links { gap: 1.4rem; }
+  .nav-links a { font-size: 0.55rem; letter-spacing: 0.2em; }
+}
+
+/* ── BANDA ORO ── */
+.banda-oro { height: 3px; background: linear-gradient(90deg, var(--bruno) 0%, var(--oro) 25%, var(--oro-pallido) 50%, var(--oro) 75%, var(--bruno) 100%); }
+
+/* ── SEPARATORE SEZIONE ── */
+.sep-sezione {
+  display: flex; align-items: center; gap: 1.4rem;
+  padding: 4rem 3rem 2rem;
+  max-width: 1400px; margin: 0 auto;
+}
+.sep-sezione .linea { flex: 1; height: 1px; background: rgba(176,136,64,0.25); }
+.sep-sezione .etichetta {
+  font-family: "Cinzel", serif; font-size: 0.62rem; letter-spacing: 0.5em;
+  text-transform: uppercase; color: var(--oro); white-space: nowrap;
+}
+
+/* ── CONTATTI LAYOUT ── */
+.contatti-wrap {
+  max-width: 960px; margin: 0 auto;
+  padding: 2rem 2rem 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .contatti-wrap { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+/* ── RECAPITI ── */
+.recapiti h2 {
+  font-family: "Cinzel", serif; font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 500; color: var(--bruno); margin-bottom: 0.5rem;
+}
+.recapiti-sottotitolo {
+  font-style: italic; color: var(--bruno-chiaro); font-size: 1rem; margin-bottom: 2.5rem;
+}
+.recapiti-linea-oro { width: 32px; height: 1.5px; background: var(--oro); margin-bottom: 2rem; }
+
+.recapito-gruppo { margin-bottom: 1.8rem; }
+.recapito-label {
+  font-family: "Cinzel", serif; font-size: 0.58rem; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--oro); margin-bottom: 0.5rem;
+}
+.recapito-valore {
+  font-size: 1.1rem; color: var(--testo-morbido); line-height: 1.8;
+}
+.recapito-valore a {
+  color: var(--testo-morbido); text-decoration: none; transition: color 0.2s;
+}
+.recapito-valore a:hover { color: var(--oro); }
+
+/* ── FORM ── */
+.form-wrap h2 {
+  font-family: "Cinzel", serif; font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 500; color: var(--bruno); margin-bottom: 0.5rem;
+}
+.form-sottotitolo {
+  font-style: italic; color: var(--bruno-chiaro); font-size: 1rem; margin-bottom: 2.5rem;
+}
+.form-linea-oro { width: 32px; height: 1.5px; background: var(--oro); margin-bottom: 2rem; }
+
+.form-contatti { display: flex; flex-direction: column; gap: 1.2rem; }
+.form-gruppo { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-label {
+  font-family: "Cinzel", serif; font-size: 0.62rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--oro);
+}
+.form-input {
+  font-family: "Cormorant Garamond", serif; font-size: 1.05rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(176,136,64,0.35);
+  background: #fff; color: var(--testo);
+  outline: none; transition: border-color 0.2s; width: 100%;
+}
+.form-input:focus { border-color: var(--oro); }
+textarea.form-input { resize: vertical; min-height: 140px; }
+.form-btn {
+  font-family: "Cinzel", serif; font-size: 0.72rem; letter-spacing: 0.3em;
+  text-transform: uppercase; padding: 0.9rem 2rem;
+  background: var(--bruno); color: var(--oro-luce);
+  border: none; cursor: pointer; transition: background 0.25s;
+  align-self: flex-start; margin-top: 0.4rem;
+}
+.form-btn:hover { background: var(--bruno-medio); }
+.form-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.form-feedback {
+  font-style: italic; font-size: 0.95rem;
+  min-height: 1.4rem; margin-top: 0.3rem;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bruno); padding: 3.5rem 2rem 2rem;
+  text-align: center; border-top: 1px solid rgba(176,136,64,0.2);
+  position: relative; overflow: hidden;
+}
+footer::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(176,136,64,0.07) 0%, transparent 70%);
+}
+.footer-inner { position: relative; z-index: 1; }
+.footer-logo { height: 52px; width: auto; opacity: 0.9; }
+.linea-oro { width: 60px; height: 1px; background: var(--oro); margin: 1.6rem auto; }
+.footer-contatti { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1rem; margin-bottom: 1.8rem; }
+.footer-link { font-family: "Cormorant Garamond", serif; font-size: 1rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; font-style: italic; }
+.footer-link:hover { color: var(--oro-luce); }
+.footer-sep { color: rgba(176,136,64,0.35); font-size: 0.9rem; }
+.footer-copy { font-family: "Cinzel", serif; font-size: 0.55rem; letter-spacing: 0.35em; color: rgba(255,255,255,0.2); text-transform: uppercase; margin-top: 1rem; }
+@media (max-width: 600px) {
+  .footer-sep { display: none; }
+  .footer-contatti { flex-direction: column; gap: 0.5rem; }
+}
+
+/* ── WA ── */
+#wa-widget {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 9998;
+  background: #25d366; width: 58px; height: 58px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#wa-widget:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="STArt_Brochure.html" class="nav-logo">
+    <img src="./immagini/logo_w1.png" alt="ST.Art Lab">
+  </a>
+  <ul class="nav-links">
+    <li><a href="STArt_ChiSiamo.html">Chi siamo</a></li>
+    <li><a href="STArt_Opere.html">Opere</a></li>
+    <li><a href="STArt_ArteFuneraria.html">Arte funeraria</a></li>
+    <li><a href="STArt_Contatti.html" class="attivo">Contatti</a></li>
+  </ul>
+</nav>
+<div class="banda-oro" style="margin-top:62px;"></div>
+
+<!-- TITOLO -->
+<div class="sep-sezione">
+  <div class="linea"></div>
+  <span class="etichetta">Contatti</span>
+  <div class="linea"></div>
+</div>
+
+<!-- CORPO -->
+<div class="contatti-wrap">
+
+  <!-- RECAPITI -->
+  <div class="recapiti">
+    <h2>Siamo a tua disposizione</h2>
+    <p class="recapiti-sottotitolo">Per preventivi, commissioni e informazioni sulle nostre opere.</p>
+    <div class="recapiti-linea-oro"></div>
+
+    <div class="recapito-gruppo">
+      <div class="recapito-label">Telefono &amp; WhatsApp</div>
+      <div class="recapito-valore">
+        <a href="tel:+393289866989">+39 328 986 6989</a><br>
+        <a href="tel:+359893678075">+359 893 678 075</a>
+      </div>
+    </div>
+
+    <div class="recapito-gruppo">
+      <div class="recapito-label">Instagram</div>
+      <div class="recapito-valore">
+        <a href="https://www.instagram.com/start.labstudio/" target="_blank" rel="noopener">@start.labstudio</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-wrap">
+    <h2>Richiedi informazioni</h2>
+    <p class="form-sottotitolo">Compila il form e ti risponderemo al più presto.</p>
+    <div class="form-linea-oro"></div>
+
+    <form class="form-contatti" id="contact-form">
+      <div class="form-gruppo">
+        <label class="form-label" for="f-nome">Nome</label>
+        <input type="text" class="form-input" id="f-nome" placeholder="Il tuo nome" required>
+      </div>
+      <div class="form-gruppo">
+        <label class="form-label" for="f-email">Email</label>
+        <input type="email" class="form-input" id="f-email" placeholder="nome@esempio.com" required>
+      </div>
+      <div class="form-gruppo">
+        <label class="form-label" for="f-msg">Messaggio</label>
+        <textarea class="form-input" id="f-msg" rows="5" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
+      </div>
+      <button type="submit" class="form-btn" id="f-btn">Invia richiesta</button>
+      <p class="form-feedback" id="form-feedback"></p>
+    </form>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <img src="./immagini/logo_w1.png" alt="ST.Art Lab" class="footer-logo">
+    <div class="linea-oro"></div>
+    <div class="footer-contatti">
+      <a href="tel:+393289866989" class="footer-link">+39 328 986 6989</a>
+      <span class="footer-sep">·</span>
+      <a href="tel:+359893678075" class="footer-link">+359 893 678 075</a>
+      <span class="footer-sep">·</span>
+      <a href="https://www.instagram.com/start.labstudio/" target="_blank" rel="noopener" class="footer-link">@start.labstudio</a>
+    </div>
+    <div class="footer-copy">© 2026 ST.Art Lab — Tutti i diritti riservati</div>
+  </div>
+</footer>
+
+<!-- WA WIDGET -->
+<a href="https://wa.me/393289866989" target="_blank" rel="noopener" id="wa-widget" title="Scrivici su WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="#fff">
+    <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.773L0 32l8.437-2.01A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.771-1.854l-.486-.29-5.01 1.194 1.234-4.874-.317-.5A13.24 13.24 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.987c-.398-.199-2.354-1.162-2.719-1.294-.365-.133-.63-.199-.895.199-.265.398-1.028 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.199-1.681-.62-3.202-1.977-1.183-1.056-1.982-2.36-2.213-2.758-.232-.398-.025-.613.174-.811.179-.178.398-.464.597-.696.199-.232.265-.398.398-.664.133-.265.066-.497-.033-.696-.1-.199-.895-2.156-1.227-2.952-.323-.775-.65-.67-.895-.682l-.762-.013c-.265 0-.696.1-1.061.497-.365.398-1.393 1.361-1.393 3.317s1.427 3.847 1.626 4.112c.199.265 2.808 4.286 6.803 6.012.951.41 1.693.655 2.271.839.954.304 1.823.261 2.51.158.766-.114 2.354-.962 2.686-1.891.332-.929.332-1.725.232-1.891-.099-.166-.365-.265-.762-.464z"/>
+  </svg>
+</a>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var form     = document.getElementById("contact-form");
+  var btn      = document.getElementById("f-btn");
+  var feedback = document.getElementById("form-feedback");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    var nome  = document.getElementById("f-nome").value;
+    var email = document.getElementById("f-email").value;
+    var msg   = document.getElementById("f-msg").value;
+
+    btn.textContent = "Invio in corso...";
+    btn.disabled = true;
+    feedback.textContent = "";
+
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        access_key: "c8dbbb0c-228d-44d2-afb5-c96a093de608",
+        subject: "Richiesta da sito ST.Art",
+        from_name: nome,
+        email: email,
+        message: msg
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.success) {
+        feedback.style.color = "#b08840";
+        feedback.textContent = "Messaggio inviato. Ti risponderemo al più presto.";
+        form.reset();
+      } else {
+        throw new Error("ko");
+      }
+    })
+    .catch(function() {
+      feedback.style.color = "#c0392b";
+      feedback.textContent = "Errore nell'invio. Scrivi a info.start.lab@gmail.com";
+    })
+    .finally(function() {
+      btn.textContent = "Invia richiesta";
+      btn.disabled = false;
+    });
+  });
+});
+</script>
+</body>
+</html>
