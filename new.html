@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chi Siamo — ST.Art Lab</title>
+<title>ST.Art Lab — Mosaici Artigianali</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="/" class="nav-logo">
+  <a href="index.html" class="nav-logo">
     <img src="./immagini/logo_w1.png" alt="ST.Art Lab">
   </a>
   <ul class="nav-links">
-    <li><a href="/" class="attivo">Chi siamo</a></li>
+    <li><a href="index.html" class="attivo">Chi siamo</a></li>
     <li><a href="opere.html">Opere</a></li>
     <li><a href="arte-funeraria.html">Arte funeraria</a></li>
     <li><a href="contatti.html">Contatti</a></li>
@@ -25,7 +25,6 @@
 
 <!-- HERO -->
 <section class="hero">
-  <!-- ornamenti SVG angoli -->
   <div class="ornamento ornamento-tl"><svg viewBox="0 0 50 50" fill="none"><path d="M2 48 V2 H48" stroke="#b08840" stroke-width="1.2"/><circle cx="2" cy="2" r="2" fill="#b08840"/></svg></div>
   <div class="ornamento ornamento-tr"><svg viewBox="0 0 50 50" fill="none"><path d="M2 48 V2 H48" stroke="#b08840" stroke-width="1.2"/><circle cx="2" cy="2" r="2" fill="#b08840"/></svg></div>
   <div class="ornamento ornamento-bl"><svg viewBox="0 0 50 50" fill="none"><path d="M2 48 V2 H48" stroke="#b08840" stroke-width="1.2"/><circle cx="2" cy="2" r="2" fill="#b08840"/></svg></div>
@@ -49,10 +48,10 @@
   </div>
   <div class="storia-visual">
     <div class="mosaico-deco" id="mosaicoDeco"></div>
-    <div class="angolo angolo-tl"></div>
-    <div class="angolo angolo-tr"></div>
-    <div class="angolo angolo-bl"></div>
-    <div class="angolo angolo-br"></div>
+    <div class="angolo angolo-lg angolo-tl"></div>
+    <div class="angolo angolo-lg angolo-tr"></div>
+    <div class="angolo angolo-lg angolo-bl"></div>
+    <div class="angolo angolo-lg angolo-br"></div>
     <div class="storia-visual-testo">
       <span class="num">∞</span>
       <span class="label">Secoli di tradizione</span>
@@ -89,9 +88,9 @@
 
 <!-- MATERIALI -->
 <section class="materiali-sezione">
-  <div class="titolo-centro" style="margin-bottom:0;">
+  <div class="titolo-centro">
     <div class="etichetta">La materia prima</div>
-    <h2 style="font-family:'Cinzel',serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:500;color:var(--bruno);">I materiali che utilizziamo</h2>
+    <h2>I materiali che utilizziamo</h2>
   </div>
   <div class="materiali-grid">
     <div class="materiale">
@@ -123,7 +122,7 @@
       <span class="footer-sep">·</span>
       <a href="tel:+359893678075" class="footer-link">+359 893 678 075</a>
       <span class="footer-sep">·</span>
-      <a href="/cdn-cgi/l/email-protection#a6cfc8c0c988d5d2c7d4d288cac7c4e6c1cbc7cfca88c5c9cb" class="footer-link"><span class="__cf_email__" data-cfemail="563f383039782522372422783a373416313b373f3a7835393b">[email&#160;protected]</span></a>
+      <a href="mailto:info.start.lab@gmail.com" class="footer-link">info.start.lab@gmail.com</a>
       <span class="footer-sep">·</span>
       <a href="https://www.instagram.com/start.labstudio/" target="_blank" rel="noopener" class="footer-link">@start.labstudio</a>
     </div>
@@ -138,10 +137,26 @@
   </svg>
 </a>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // Generazione griglia mosaico decorativa
 (function() {
   const colori = [
     '#b08840','#d4aa5a','#f0dea0','#7a5c3a','#4a3520',
     '#c8a96a','#e8c87a','#9a6a3a','#f5edd8','#2e1f0e',
-    '#d4aa5a','#b08840','#6a4a28','#e0c890','#faf6e
+    '#d4aa5a','#b08840','#6a4a28','#e0c890','#faf6ef',
+    '#b08840','#9a8060','#d4aa5a','#f0dea0','#7a5c3a'
+  ];
+  const griglia = document.getElementById('mosaicoDeco');
+  if (!griglia) return;
+  for (let i = 0; i < 64; i++) {
+    const t = document.createElement('div');
+    t.className = 'tessera';
+    t.style.background = colori[Math.floor(Math.random() * colori.length)];
+    t.style.animationDelay = (Math.random() * 4) + 's';
+    griglia.appendChild(t);
+  }
+})();
+</script>
+
+</body>
+</html>
