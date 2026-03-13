@@ -5,170 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Opere — ST.Art Lab</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
-<style>
-@font-face {
-  font-family: "Laubag";
-  src: url("./fonts/Laubag.woff2") format("woff2"),
-       url("./fonts/Laubag.woff") format("woff");
-  font-weight: normal; font-style: normal; font-display: swap;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --oro: #b08840; --oro-luce: #d4aa5a; --oro-pallido: #f0dea0;
-  --bruno: #2e1f0e; --bruno-medio: #4a3520; --bruno-chiaro: #7a5c3a;
-  --crema: #faf6ef; --crema-scura: #ede4d4; --pergamena: #f5edd8;
-  --testo: #2a1c0a; --testo-morbido: #5c4530;
-}
-html { scroll-behavior: smooth; }
-body { font-family: "Cormorant Garamond", Georgia, serif; background: var(--crema); color: var(--testo); overflow-x: hidden; }
-
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(46,31,14,0.97);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(176,136,64,0.2);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 2.5rem; height: 62px;
-}
-.nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-.nav-logo img { height: 42px; width: auto; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35)); transition: opacity 0.2s; }
-.nav-logo:hover img { opacity: 0.85; }
-.nav-links { display: flex; gap: 2.5rem; list-style: none; }
-.nav-links a {
-  font-family: "Cinzel", serif; font-size: 0.6rem; letter-spacing: 0.35em;
-  text-transform: uppercase; color: rgba(255,255,255,0.55);
-  text-decoration: none; transition: color 0.2s;
-}
-.nav-links a:hover, .nav-links a.attivo { color: var(--oro-luce); }
-.nav-links a.attivo { border-bottom: 1px solid var(--oro); padding-bottom: 2px; }
-@media (max-width: 600px) {
-  nav { padding: 0 1.2rem; }
-  .nav-links { gap: 1.4rem; }
-  .nav-links a { font-size: 0.55rem; letter-spacing: 0.2em; }
-}
-
-/* ── BANDA ORO ── */
-.banda-oro { height: 3px; background: linear-gradient(90deg, var(--bruno) 0%, var(--oro) 25%, var(--oro-pallido) 50%, var(--oro) 75%, var(--bruno) 100%); }
-
-/* ── SEPARATORE SEZIONE ── */
-.sep-sezione {
-  display: flex; align-items: center; gap: 1.4rem;
-  padding: 4rem 3rem 2rem;
-  max-width: 1400px; margin: 0 auto;
-}
-.sep-sezione .linea { flex: 1; height: 1px; background: rgba(176,136,64,0.25); }
-.sep-sezione .etichetta {
-  font-family: "Cinzel", serif; font-size: 0.62rem; letter-spacing: 0.5em;
-  text-transform: uppercase; color: var(--oro); white-space: nowrap;
-}
-
-/* ── MASONRY ── */
-.masonry-wrap {
-  padding: 0 2rem 5rem;
-  max-width: 1400px; margin: 0 auto;
-}
-.masonry {
-  columns: 4 280px;
-  column-gap: 10px;
-}
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 10px;
-  overflow: hidden;
-  position: relative;
-  cursor: zoom-in;
-}
-.masonry-item img {
-  display: block; width: 100%;
-  transition: transform 0.6s ease, filter 0.4s ease;
-  filter: brightness(0.97);
-}
-.masonry-item:hover img {
-  transform: scale(1.03);
-  filter: brightness(1.04);
-}
-
-/* placeholder when no image */
-.placeholder {
-  display: block; width: 100%;
-  background: var(--crema-scura);
-  position: relative;
-}
-.placeholder::after {
-  content: "";
-  position: absolute; inset: 8px;
-  border: 1px solid rgba(176,136,64,0.3);
-  pointer-events: none;
-}
-
-/* ── DIVISORE TRA SEZIONI ── */
-.divisore {
-  border: none;
-  border-top: 1px solid rgba(176,136,64,0.18);
-  margin: 1rem 3rem 0;
-  max-width: 1400px;
-}
-
-/* ── FOOTER ── */
-footer {
-  background: var(--bruno); padding: 3.5rem 2rem 2rem;
-  text-align: center; border-top: 1px solid rgba(176,136,64,0.2);
-  position: relative; overflow: hidden;
-}
-footer::before {
-  content: ""; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center, rgba(176,136,64,0.07) 0%, transparent 70%);
-}
-.footer-inner { position: relative; z-index: 1; }
-.footer-logo { height: 52px; width: auto; opacity: 0.9; }
-.linea-oro { width: 60px; height: 1px; background: var(--oro); margin: 1.6rem auto; }
-.footer-contatti { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1rem; margin-bottom: 1.8rem; }
-.footer-link { font-family: "Cormorant Garamond", serif; font-size: 1rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; font-style: italic; }
-.footer-link:hover { color: var(--oro-luce); }
-.footer-sep { color: rgba(176,136,64,0.35); font-size: 0.9rem; }
-.footer-copy { font-family: "Cinzel", serif; font-size: 0.55rem; letter-spacing: 0.35em; color: rgba(255,255,255,0.2); text-transform: uppercase; margin-top: 1rem; }
-@media (max-width: 600px) {
-  .footer-sep { display: none; }
-  .footer-contatti { flex-direction: column; gap: 0.5rem; }
-}
-
-/* ── WA ── */
-#wa-widget {
-  position: fixed; bottom: 2rem; right: 2rem; z-index: 9998;
-  background: #25d366; width: 58px; height: 58px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.45);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-#wa-widget:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
-
-/* ── LIGHTBOX ── */
-#lb-overlay {
-  display: none; position: fixed; inset: 0; z-index: 99999;
-  background: rgba(8,4,1,0.96);
-  justify-content: center; align-items: center; padding: 1rem;
-}
-#lb-overlay.open { display: flex; }
-#lb-box { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; max-width: 92vw; max-height: 92vh; }
-#lb-overlay img { max-width: 88vw; max-height: 82vh; object-fit: contain; display: block; box-shadow: 0 0 60px rgba(176,136,64,0.2); }
-#lb-close {
-  font-family: "Cinzel", serif; font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--oro-luce); background: transparent; border: 1px solid rgba(176,136,64,0.5);
-  padding: 0.35rem 1rem; cursor: pointer; align-self: flex-end;
-}
-#lb-close:hover { background: rgba(176,136,64,0.1); }
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="STArt_Brochure.html" class="nav-logo">
+  <a href="/" class="nav-logo">
     <img src="./immagini/logo_w1.png" alt="ST.Art Lab">
   </a>
   <ul class="nav-links">
-    <li><a href="new.html">Chi siamo</a></li>
+    <li><a href="/">Chi siamo</a></li>
     <li><a href="opere.html" class="attivo">Opere</a></li>
     <li><a href="arte-funeraria.html">Arte funeraria</a></li>
     <li><a href="contatti.html">Contatti</a></li>
